@@ -4,6 +4,18 @@ scene = {
         [0] =
         {assetId = "enemy_alan", filePath = "./assets/images/enemy_alan.png"},
         {assetId = "player_ship", filePath = "./assets/images/player_ship.png"},
+        {assetId = "terrain_tile_77", filePath = "./assets/terrain/Zombie-Tileset---_0077_Capa-78.png"},
+        {assetId = "terrain_tile_78", filePath = "./assets/terrain/Zombie-Tileset---_0078_Capa-79.png"},
+        {assetId = "terrain_tile_79", filePath = "./assets/terrain/Zombie-Tileset---_0079_Capa-80.png"},
+        {assetId = "terrain_tile_80", filePath = "./assets/terrain/Zombie-Tileset---_0080_Capa-81.png"},
+        {assetId = "player_idle_up", filePath = "./assets/player/Idle/Character_up_idle-Sheet6.png"},
+        {assetId = "player_idle_side", filePath = "./assets/player/Idle/Character_side_idle-Sheet6.png"},
+        {assetId = "player_idle_side_left", filePath = "./assets/player/Idle/Character_side-left_idle-Sheet6.png"},
+        {assetId = "player_idle_down", filePath = "./assets/player/Idle/Character_down_idle-Sheet6.png"},
+        {assetId = "player_run_up", filePath = "./assets/player/Run/Character_up_run-Sheet6.png"},
+        {assetId = "player_run_side", filePath = "./assets/player/Run/Character_side_run-Sheet6.png"},
+        {assetId = "player_run_side_left", filePath = "./assets/player/Run/Character_side-left_run-Sheet6.png"},
+        {assetId = "player_run_down", filePath = "./assets/player/Run/Character_down_run-Sheet6.png"},
     },
 
     -- Tabla de fuentes
@@ -28,11 +40,61 @@ scene = {
     },
 
     -- Tabla de entidades
-    entities = {
-        [0] = 
-        -- Player
-        {
-            components = {                
+    entities = {},
+}
+
+-- Generar grid de terreno que llena toda la pantalla
+-- Ventana 800x600, tiles 16x16 = 50x37.5 tiles (50x38)
+local tileSize = 16
+local terrains = {"terrain_tile_77", "terrain_tile_78", "terrain_tile_79", "terrain_tile_80"}
+local tilesX = 50
+local tilesY = 38
+local entityIndex = 0
+local terrainIndex = 1
+
+for y = 0, tilesY - 1 do
+    for x = 0, tilesX - 1 do
+        -- Distribución ponderada: 77 y 78 predominan (40% cada uno), 79 y 80 son minoría (10% cada uno)
+        local rand = math.random()
+        local terrainAsset
+        
+        if rand < 0.4 then
+            terrainAsset = terrains[1] -- terrain_tile_77 (40%)
+        elseif rand < 0.8 then
+            terrainAsset = terrains[2] -- terrain_tile_78 (40%)
+        elseif rand < 0.9 then
+            terrainAsset = terrains[3] -- terrain_tile_79 (10%)
+        else
+            terrainAsset = terrains[4] -- terrain_tile_80 (10%)
+        end
+        
+        scene.entities[entityIndex] = {
+            components = {
+                sprite = {
+                    assetId = terrainAsset,
+                    width = tileSize,
+                    height = tileSize,
+                    src_rect = {x = 0, y = 0},
+                },
+                transform = {
+                    position = {x = x * tileSize, y = y * tileSize},
+                    scale = {x = 1.0, y = 1.0},
+                    rotation = 0.0,
+                }
+            }
+        }
+        entityIndex = entityIndex + 1
+    end
+end
+
+-- Player
+scene.entities[entityIndex] = {
+            components = {       
+                animation = {
+                    num_frames = 6,
+                    speed_rate = 10,
+                    is_loop = true,
+                },      
                 circle_collider = {
                     radius = 8,
                     width = 16,
@@ -45,10 +107,10 @@ scene = {
                     path = "./assets/scripts/player.lua"
                 },
                 sprite = {
-                    assetId = "player_ship",
+                    assetId = "player_idle_down",
                     width = 16,
                     height = 16,
-                    src_rect = {x = 16, y = 0},
+                    src_rect = {x = 0, y = 0},
                 },
                 transform = {
                     position = {x = 400, y = 300},
@@ -56,24 +118,7 @@ scene = {
                     rotation = 0.0,
                 }
             }
-        },
-        {
-            components = {
-                clickable = {},
-                text = {
-                    text = "Score: 100",
-                    fontId = "press_start",
-                    r = 150,
-                    g = 0,
-                    b = 150,
-                    a = 255
-                },
-                transform = {
-                    position = {x = 500.0, y = 50.0},
-                    scale  = {x = 1.0, y = 1.0},
-                    rotation = 0.0,
-                }
-            }
-        },
-    }
-}
+        }
+        
+entityIndex = entityIndex + 1
+

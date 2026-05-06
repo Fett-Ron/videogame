@@ -3,6 +3,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <iostream>
+
 #include "../ECS/ECS.hpp"
 #include "../Components/AnimationComponent.hpp"
 #include "../Components/SpriteComponent.hpp"
@@ -22,6 +24,7 @@ class AnimationSystem : public System {
             animation.currentFrame = ((SDL_GetTicks() - animation.startTime) 
                 * animation.frameSpeedRate / 1000) % animation.numFrames;
             sprite.srcRect.x = animation.currentFrame * sprite.width;
+            std::cout << "[ANIMATIONSYSTEM] srcRect: " << sprite.srcRect.x << std::endl;
         }
     }
 };
