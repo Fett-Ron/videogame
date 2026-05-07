@@ -24,7 +24,7 @@ class AnimationSystem : public System {
             animation.currentFrame = ((SDL_GetTicks() - animation.startTime) 
                 * animation.frameSpeedRate / 1000) % animation.numFrames;
             sprite.srcRect.x = animation.currentFrame * sprite.width;
-            std::cout << "[ANIMATIONSYSTEM] srcRect: " << sprite.srcRect.x << std::endl;
+            //std::cout << "[ANIMATIONSYSTEM] srcRect: " << sprite.srcRect.x << std::endl;
         }
     }
 };
