@@ -8,14 +8,19 @@ scene = {
         {assetId = "terrain_tile_78", filePath = "./assets/terrain/Zombie-Tileset---_0078_Capa-79.png"},
         {assetId = "terrain_tile_79", filePath = "./assets/terrain/Zombie-Tileset---_0079_Capa-80.png"},
         {assetId = "terrain_tile_80", filePath = "./assets/terrain/Zombie-Tileset---_0080_Capa-81.png"},
-        {assetId = "player_idle_up", filePath = "./assets/player/Idle/Character_up_idle-Sheet6.png"},
-        {assetId = "player_idle_side", filePath = "./assets/player/Idle/Character_side_idle-Sheet6.png"},
-        {assetId = "player_idle_side_left", filePath = "./assets/player/Idle/Character_side-left_idle-Sheet6.png"},
-        {assetId = "player_idle_down", filePath = "./assets/player/Idle/Character_down_idle-Sheet6.png"},
-        {assetId = "player_run_up", filePath = "./assets/player/Run/Character_up_run-Sheet6.png"},
-        {assetId = "player_run_side", filePath = "./assets/player/Run/Character_side_run-Sheet6.png"},
-        {assetId = "player_run_side_left", filePath = "./assets/player/Run/Character_side-left_run-Sheet6.png"},
-        {assetId = "player_run_down", filePath = "./assets/player/Run/Character_down_run-Sheet6.png"},
+        {assetId = "player_idle_up", filePath = "./assets/gun/Idle/Character_up_idle_no_hands.png"},
+        {assetId = "player_idle_side", filePath = "./assets/gun/Idle/Character_side_idle_no_hands.png"},
+        {assetId = "player_idle_side_left", filePath = "./assets/gun/Idle/Character_side-left_idle_no_hands.png"},
+        {assetId = "player_idle_down", filePath = "./assets/gun/Idle/Character_down_idle_no_hands.png"},
+        {assetId = "player_run_up", filePath = "./assets/gun/Run/Character_up_run_no_hands.png"},
+        {assetId = "player_run_side", filePath = "./assets/gun/Run/Character_side_run_no_hands.png"},
+        {assetId = "player_run_side_left", filePath = "./assets/gun/Run/Character_side-left_run_no_hands.png"},
+        {assetId = "player_run_down", filePath = "./assets/gun/Run/Character_down_run_no_hands.png"},
+        -- Zombie sprites
+        {assetId = "zombie_idle_up", filePath = "./assets/zombie_small/walk/Zombie_Small_Up_Walk-Sheet6.png"},
+        {assetId = "zombie_idle_side", filePath = "./assets/zombie_small/walk/Zombie_Small_Side_Walk-Sheet6.png"},
+        {assetId = "zombie_idle_side_left", filePath = "./assets/zombie_small/walk/Zombie_Small_Side-left_Walk-Sheet6.png"},
+        {assetId = "zombie_idle_down", filePath = "./assets/zombie_small/walk/Zombie_Small_Down_walk-Sheet6.png"},
         -- Containers para decoración de bordes
         {assetId = "container_gray_v", filePath = "./assets/building/Container_1_Gray_Vertical.png"},
         {assetId = "container_gray_bleak_v", filePath = "./assets/building/Container_2_Gray_Vertical_Overgrown_Bleak-Yellow.png"},
@@ -129,5 +134,145 @@ scene.entities[entityIndex] = {
             }
         }
         
+entityIndex = entityIndex + 1
+
+-- Zombie en esquina superior-izquierda
+scene.entities[entityIndex] = {
+    components = {       
+        animation = {
+            num_frames = 6,
+            speed_rate = 10,
+            is_loop = true,
+        },      
+        circle_collider = {
+            radius = 8,
+            width = 16,
+            height = 16,
+        },
+        rigid_body = {
+            velocity = {x = 0, y = 0},
+        },
+        script = {
+            path = "./assets/scripts/zombie.lua"
+        },
+        sprite = {
+            assetId = "zombie_idle_down",
+            width = 16,
+            height = 16,
+            src_rect = {x = 0, y = 0},
+        },
+        transform = {
+            position = {x = 20, y = 20},
+            scale = {x = 2.0, y = 2.0},
+            rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1
+
+-- Zombie en esquina superior-derecha
+scene.entities[entityIndex] = {
+    components = {       
+        animation = {
+            num_frames = 6,
+            speed_rate = 10,
+            is_loop = true,
+        },      
+        circle_collider = {
+            radius = 8,
+            width = 16,
+            height = 16,
+        },
+        rigid_body = {
+            velocity = {x = 0, y = 0},
+        },
+        script = {
+            path = "./assets/scripts/zombie.lua"
+        },
+        sprite = {
+            assetId = "zombie_idle_down",
+            width = 16,
+            height = 16,
+            src_rect = {x = 0, y = 0},
+        },
+        transform = {
+            position = {x = 760, y = 20},
+            scale = {x = 2.0, y = 2.0},
+            rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1
+
+-- Zombie en esquina inferior-izquierda
+scene.entities[entityIndex] = {
+    components = {       
+        animation = {
+            num_frames = 6,
+            speed_rate = 10,
+            is_loop = true,
+        },      
+        circle_collider = {
+            radius = 8,
+            width = 16,
+            height = 16,
+        },
+        rigid_body = {
+            velocity = {x = 0, y = 0},
+        },
+        script = {
+            path = "./assets/scripts/zombie.lua"
+        },
+        sprite = {
+            assetId = "zombie_idle_down",
+            width = 16,
+            height = 16,
+            src_rect = {x = 0, y = 0},
+        },
+        transform = {
+            position = {x = 20, y = 560},
+            scale = {x = 2.0, y = 2.0},
+            rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1
+
+-- Zombie en esquina inferior-derecha
+scene.entities[entityIndex] = {
+    components = {       
+        animation = {
+            num_frames = 6,
+            speed_rate = 10,
+            is_loop = true,
+        },      
+        circle_collider = {
+            radius = 8,
+            width = 16,
+            height = 16,
+        },
+        rigid_body = {
+            velocity = {x = 0, y = 0},
+        },
+        script = {
+            path = "./assets/scripts/zombie.lua"
+        },
+        sprite = {
+            assetId = "zombie_idle_down",
+            width = 16,
+            height = 16,
+            src_rect = {x = 0, y = 0},
+        },
+        transform = {
+            position = {x = 760, y = 560},
+            scale = {x = 2.0, y = 2.0},
+            rotation = 0.0,
+        }
+    }
+}
+
 entityIndex = entityIndex + 1
 

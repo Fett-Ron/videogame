@@ -20,6 +20,8 @@ class ScriptSystem : public System {
 
         // functions
         lua.set_function("is_action_activated", isActionActivated);
+        lua.set_function("get_position", getPosition);
+        lua.set_function("set_position", setPosition);
         lua.set_function("set_velocity", setVelocity);
         lua.set_function("change_animation", changeAnimation);
         lua.set_function("go_to_scene", goToScene);

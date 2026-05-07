@@ -2,16 +2,30 @@
 #define LUABINDING_HPP
 
 #include <string>
+#include <glm/glm.hpp>
 
 #include "../Components/RigidBodyComponent.hpp"
 #include "../Components/SpriteComponent.hpp"
 #include "../Components/AnimationComponent.hpp"
+#include "../Components/TransformComponent.hpp"
 #include "../ECS/ECS.hpp"
 #include "../Game/Game.hpp"
 
 // Controles
 bool isActionActivated(const std::string& action) {
     return Game::getInstance().controllerManager->isActionActivated(action);
+}
+
+// TransformComponent
+glm::vec2 getPosition(Entity entity) {
+    auto& transform = entity.getComponent<TransformComponent>();
+    return transform.position;
+}
+
+void setPosition(Entity entity, float x, float y) {
+    auto& transform = entity.getComponent<TransformComponent>();
+    transform.position.x = x;
+    transform.position.y = y;
 }
 
 // RigidBodyComponent

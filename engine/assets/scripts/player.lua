@@ -2,9 +2,9 @@
 player_velocity = 150;
 fixed_player_velocity = math.sqrt((player_velocity * player_velocity) / 2)
 
--- Variables de estado
-current_direction = "down"
-current_state = "idle"  -- "idle" o "run"
+-- Variables de estado (locales para esta instancia)
+local current_direction = "down"
+local current_state = "idle"  -- "idle" o "run"
 
 function get_direction(vel_x, vel_y)
     -- Determinar dirección basada en velocidad
@@ -31,6 +31,10 @@ function change_player_animation(direction, state)
 end
 
 function update()
+    -- Exponer posición global para otros scripts
+    _G["player_entity"] = this
+    _G["player_position"] = get_position(this)
+    
     set_velocity(this, 0, 0);
     vel_x = 0
     vel_y = 0
