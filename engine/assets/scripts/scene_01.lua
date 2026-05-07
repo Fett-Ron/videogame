@@ -16,6 +16,15 @@ scene = {
         {assetId = "player_run_side", filePath = "./assets/player/Run/Character_side_run-Sheet6.png"},
         {assetId = "player_run_side_left", filePath = "./assets/player/Run/Character_side-left_run-Sheet6.png"},
         {assetId = "player_run_down", filePath = "./assets/player/Run/Character_down_run-Sheet6.png"},
+        -- Containers para decoración de bordes
+        {assetId = "container_gray_v", filePath = "./assets/building/Container_1_Gray_Vertical.png"},
+        {assetId = "container_gray_bleak_v", filePath = "./assets/building/Container_2_Gray_Vertical_Overgrown_Bleak-Yellow.png"},
+        {assetId = "container_gray_h", filePath = "./assets/building/Container_3_Gray_Horizontal.png"},
+        {assetId = "container_gray_bleak_h", filePath = "./assets/building/Container_4_Gray_Horizontal_Overgrown_Bleak-Yellow.png"},
+        {assetId = "container_green_bleak_v", filePath = "./assets/building/Container_10_Green_Vertical_Overgrown_Bleak-Yellow.png"},
+        {assetId = "container_green_h", filePath = "./assets/building/Container_11_Green_Horizontal.png"},
+        {assetId = "container_green_bleak_h", filePath = "./assets/building/Container_12_Green_Horizontal_Overgrown_Bleak-Yellow.png"},
+        {assetId = "container_green_v", filePath = "./assets/building/Container_9_Green_Vertical.png"},
     },
 
     -- Tabla de fuentes
