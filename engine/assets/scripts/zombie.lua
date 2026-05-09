@@ -60,7 +60,7 @@ end
 
 function update()
     local player_pos = _G["player_position"]
-    
+    print(player_pos.x)
     if player_pos == nil then
         set_velocity(this, 0, 0)
         return

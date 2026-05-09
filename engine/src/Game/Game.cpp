@@ -100,6 +100,7 @@ void Game::setup() {
 
     lua.open_libraries(sol::lib::base, sol::lib::math);
     lua.script_file("./assets/scripts/player.lua");
+    lua.script_file("./assets/scripts/zombie.lua");
     registry->getSystem<ScriptSystem>().createLuaBinding(lua);    
 }
 

@@ -17,6 +17,10 @@ class ScriptSystem : public System {
     void createLuaBinding(sol::state& lua) {
         // clases
         lua.new_usertype<Entity>("entity");
+        lua.new_usertype<glm::vec2>("vec2",
+            "x", &glm::vec2::x,
+            "y", &glm::vec2::y
+        );
 
         // functions
         lua.set_function("is_action_activated", isActionActivated);
