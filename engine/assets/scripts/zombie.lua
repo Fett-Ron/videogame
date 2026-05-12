@@ -15,7 +15,9 @@ ZOMBIE_SYSTEM.states[zombie_id] = {
     velocity = 80,
     direction = "down",
     last_attack_time = -3000,  -- Iniciar en pasado negativo para permitir primer ataque inmediato
-    is_attacking = false
+    is_attacking = false,
+    attack_start_time = 0,
+    attack_duration = 500  -- Duración de la animación de ataque en ms
 }
 
 local my_state = ZOMBIE_SYSTEM.states[zombie_id]
@@ -86,27 +88,30 @@ function update()
     local attack_range = 40
     local current_time = get_time_miliseconds()
   
-    -- Verificar si el zombie debe atacar
-    if distance < attack_range and (current_time - my_state.last_attack_time) >= 2000 then        
-        -- Ejecutar ataque
+    -- Si está atacando actualmente, mantener la animación de ataque hasta que termine
+    if my_state.is_attacking then
+        set_velocity(this, 0, 0)
+        
+        -- Verificar si la animación de ataque ha terminado
+        if (current_time - my_state.attack_start_time) >= my_state.attack_duration then
+            my_state.is_attacking = false
+            -- Volver a animación de movimiento
+            change_zombie_animation(new_direction)
+            my_state.direction = new_direction
+        end
+    -- Verificar si debería iniciar un nuevo ataque
+    elseif distance < attack_range and (current_time - my_state.last_attack_time) >= 2000 then
+        -- Iniciar ataque
         my_state.is_attacking = true
+        my_state.attack_start_time = current_time
         my_state.last_attack_time = current_time
-        
-        -- Cambiar a animación de ataque
         change_zombie_attack_animation(new_direction)
-        
-        -- Frenar el movimiento durante el ataque
         set_velocity(this, 0, 0)
         
         -- TODO: Aplicar daño al jugador si está en el rango de ataque
         -- TODO: Considerar si el daño debe ser direccional (solo si está frente al zombie)
-    else        
-        -- No atacar, volver a movimiento normal
-        if my_state.is_attacking then
-            my_state.is_attacking = false
-            change_zombie_animation(new_direction)
-        end
-        
+    -- Movimiento normal si no está atacando
+    else
         set_velocity(this, vel_x, vel_y)
         
         if new_direction ~= my_state.direction then
