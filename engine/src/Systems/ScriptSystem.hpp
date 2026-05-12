@@ -29,6 +29,7 @@ class ScriptSystem : public System {
         lua.set_function("set_velocity", setVelocity);
         lua.set_function("change_animation", changeAnimation);
         lua.set_function("go_to_scene", goToScene);
+        lua.set_function("get_time_miliseconds", getTimeMiliseconds);
     }
 
     void update(sol::state& lua) {

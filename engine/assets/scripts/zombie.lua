@@ -14,7 +14,7 @@ local zombie_id = ZOMBIE_SYSTEM.counter
 ZOMBIE_SYSTEM.states[zombie_id] = {
     velocity = 80,
     direction = "down",
-    last_attack_time = 0,
+    last_attack_time = -3000,  -- Iniciar en pasado negativo para permitir primer ataque inmediato
     is_attacking = false
 }
 
@@ -61,6 +61,7 @@ function change_zombie_animation(direction)
 end
 
 function change_zombie_attack_animation(direction)
+
     local anim_name = "zombie_attack_" .. direction
     change_animation(this, anim_name, 4, 10, false)
 end
@@ -81,13 +82,12 @@ function update()
     local dx = player_pos.x - zombie_pos.x
     local dy = player_pos.y - zombie_pos.y
     local distance = math.sqrt(dx * dx + dy * dy)
-    
     -- Distancia de ataque: ancho del sprite escalado (16 * 2.0 = 32)
-    local attack_range = 32
-    local current_time = os.clock()
-    
+    local attack_range = 40
+    local current_time = get_time_miliseconds()
+  
     -- Verificar si el zombie debe atacar
-    if distance < attack_range and (current_time - my_state.last_attack_time) >= 2.0 then
+    if distance < attack_range and (current_time - my_state.last_attack_time) >= 2000 then        
         -- Ejecutar ataque
         my_state.is_attacking = true
         my_state.last_attack_time = current_time

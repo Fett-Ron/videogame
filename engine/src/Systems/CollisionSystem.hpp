@@ -48,8 +48,8 @@ class CollisionSystem : public System {
                 bool collision = checkCircularCollision(aRadius, bRadius
                     , aCenterPos, bCenterPos);
                 if (collision) {
-                    std::cout << "[COLLISIONSYSTEM] Colision entre " << a.getId() 
-                    << " y " << b.getId() << std::endl;
+                    //std::cout << "[COLLISIONSYSTEM] Colision entre " << a.getId() 
+                    //<< " y " << b.getId() << std::endl;
                     
                     // Resolver colisión: separar entidades
                     resolveCollision(aTransform, bTransform, aCenterPos, bCenterPos, aRadius, bRadius);

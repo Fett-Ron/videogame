@@ -20,8 +20,9 @@ class DamageSystem : public System {
     }
 
     void onCollision(CollisionEvent& e){
-        std::cout << "[DAMAGESYSTEM] Colision detectada entre " << e.a.getId() 
-        << " y " << e.b.getId() << std::endl;
+        (void) e;
+        //std::cout << "[DAMAGESYSTEM] Colision detectada entre " << e.a.getId() 
+        //<< " y " << e.b.getId() << std::endl;
         // Por ahora, deshabilitado para que zombies no se eliminen
         // e.a.kill();
         // e.b.kill();
