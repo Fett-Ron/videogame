@@ -21,6 +21,11 @@ scene = {
         {assetId = "zombie_idle_side", filePath = "./assets/zombie_small/walk/Zombie_Small_Side_Walk-Sheet6.png"},
         {assetId = "zombie_idle_side_left", filePath = "./assets/zombie_small/walk/Zombie_Small_Side-left_Walk-Sheet6.png"},
         {assetId = "zombie_idle_down", filePath = "./assets/zombie_small/walk/Zombie_Small_Down_walk-Sheet6.png"},
+        -- Zombie attack sprites
+        {assetId = "zombie_attack_up", filePath = "./assets/zombie_small/attack1/Zombie_Small_Up_First-Attack-Sheet4.png"},
+        {assetId = "zombie_attack_side", filePath = "./assets/zombie_small/attack1/Zombie_Small_Side_First-Attack-Sheet4.png"},
+        {assetId = "zombie_attack_side_left", filePath = "./assets/zombie_small/attack1/Zombie_Small_Side-left_First-Attack-Sheet4.png"},
+        {assetId = "zombie_attack_down", filePath = "./assets/zombie_small/attack1/Zombie_Small_Down_First-Attack-Sheet4.png"},
         -- Containers para decoración de bordes
         {assetId = "container_gray_v", filePath = "./assets/building/Container_1_Gray_Vertical.png"},
         {assetId = "container_gray_bleak_v", filePath = "./assets/building/Container_2_Gray_Vertical_Overgrown_Bleak-Yellow.png"},
