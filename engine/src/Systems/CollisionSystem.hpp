@@ -23,7 +23,7 @@ class CollisionSystem : public System {
         for (auto i = entities.begin(); i != entities.end(); i++) {
             Entity a = *i;
             auto aCollider = a.getComponent<CircleColliderComponent>();
-            auto aTransform = a.getComponent<TransformComponent>();
+            auto& aTransform = a.getComponent<TransformComponent>();
 
             for (auto j = i; j != entities.end(); j++) {
                 Entity b = *j;
@@ -31,7 +31,7 @@ class CollisionSystem : public System {
                     continue;
                 }
                 auto bCollider = b.getComponent<CircleColliderComponent>();
-                auto bTransform = b.getComponent<TransformComponent>();
+                auto& bTransform = b.getComponent<TransformComponent>();
 
                 glm::vec2 aCenterPos = glm::vec2(
                     aTransform.position.x - (aCollider.width / 2) * aTransform.scale.x,
@@ -50,10 +50,40 @@ class CollisionSystem : public System {
                 if (collision) {
                     std::cout << "[COLLISIONSYSTEM] Colision entre " << a.getId() 
                     << " y " << b.getId() << std::endl;
+                    
+                    // Resolver colisión: separar entidades
+                    resolveCollision(aTransform, bTransform, aCenterPos, bCenterPos, aRadius, bRadius);
+                    
                     eventManager->emitEvent<CollisionEvent>(a, b);
                 }
             }            
         }
+    }
+
+    void resolveCollision(TransformComponent& aTransform, TransformComponent& bTransform,
+                         glm::vec2 aPos, glm::vec2 bPos, float aRadius, float bRadius) {
+        // Calcular vector entre los centros
+        glm::vec2 collision_normal = aPos - bPos;
+        float distance = glm::length(collision_normal);
+        
+        if (distance < 0.001f) {
+            // Si están exactamente en el mismo lugar, usar vector aleatorio
+            collision_normal = glm::vec2(1.0f, 0.0f);
+            distance = 1.0f;
+        } else {
+            // Normalizar el vector
+            collision_normal = collision_normal / distance;
+        }
+        
+        // Calcular la penetración (cuánto se solapan)
+        float penetration = (aRadius + bRadius) - distance;
+        if (penetration <= 0) return;
+        
+        // Separar a ambas entidades por igual
+        float separation = penetration / 2.0f + 0.01f; // +0.01 para evitar que queden pegadas
+        
+        aTransform.position += collision_normal * separation;
+        bTransform.position -= collision_normal * separation;
     }
 
     bool checkCircularCollision(int aRadius, int bRadius

@@ -88,12 +88,12 @@ void Game::init(){
 
 void Game::setup() {
     registry->addSystem<RenderSystem>();
+    registry->addSystem<ScriptSystem>();
     registry->addSystem<MovementSystem>();
     registry->addSystem<CollisionSystem>();    
     registry->addSystem<DamageSystem>();
     registry->addSystem<AnimationSystem>();
     registry->addSystem<RenderTextSystem>();
-    registry->addSystem<ScriptSystem>();
     registry->addSystem<UISystem>();
 
     sceneManager->loadSceneFromScript("./assets/scripts/scenes.lua", lua);
