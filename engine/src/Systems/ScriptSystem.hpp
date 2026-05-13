@@ -16,7 +16,9 @@ class ScriptSystem : public System {
 
     void createLuaBinding(sol::state& lua) {
         // clases
-        lua.new_usertype<Entity>("entity");
+        lua.new_usertype<Entity>("entity",
+            "kill", &Entity::kill
+        );
         lua.new_usertype<glm::vec2>("vec2",
             "x", &glm::vec2::x,
             "y", &glm::vec2::y
@@ -34,6 +36,7 @@ class ScriptSystem : public System {
         lua.set_function("get_health", getHealth);
         lua.set_function("is_entity_dead", isEntityDead);
         lua.set_function("set_text", setText);
+        lua.set_function("create_bullet", createBullet);
     }
 
     void update(sol::state& lua) {

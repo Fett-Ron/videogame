@@ -12,7 +12,7 @@ local zombie_id = ZOMBIE_SYSTEM.counter
 
 -- Inicializar el estado de este zombie
 ZOMBIE_SYSTEM.states[zombie_id] = {
-    velocity = 80,
+    velocity = 40,
     direction = "down",
     last_attack_time = -3000,  -- Iniciar en pasado negativo para permitir primer ataque inmediato
     is_attacking = false,

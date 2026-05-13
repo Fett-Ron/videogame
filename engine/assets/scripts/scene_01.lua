@@ -26,6 +26,13 @@ scene = {
         {assetId = "zombie_attack_side", filePath = "./assets/zombie_small/attack1/Zombie_Small_Side_First-Attack-Sheet4.png"},
         {assetId = "zombie_attack_side_left", filePath = "./assets/zombie_small/attack1/Zombie_Small_Side-left_First-Attack-Sheet4.png"},
         {assetId = "zombie_attack_down", filePath = "./assets/zombie_small/attack1/Zombie_Small_Down_First-Attack-Sheet4.png"},
+        -- Firing sprites (muzzle flash animation)
+        {assetId = "fire_up", filePath = "./assets/firing/Fire_Up-Sheet3.png"},
+        {assetId = "fire_side", filePath = "./assets/firing/Fire_side-Sheet3.png"},
+        {assetId = "fire_side_left", filePath = "./assets/firing/Fire_side-left-Sheet3.png"},
+        {assetId = "fire_down", filePath = "./assets/firing/Fire_Down-Sheet3.png"},
+        -- Bullet sprite
+        {assetId = "bullet", filePath = "./assets/bullets/Pistol-bullet_Bullet.png"},
         -- Containers para decoración de bordes
         {assetId = "container_gray_v", filePath = "./assets/building/Container_1_Gray_Vertical.png"},
         {assetId = "container_gray_bleak_v", filePath = "./assets/building/Container_2_Gray_Vertical_Overgrown_Bleak-Yellow.png"},
@@ -50,6 +57,7 @@ scene = {
         {name = "left", key = 97},
         {name = "down", key = 115},
         {name = "right", key = 100},
+        {name = "shoot", key = 106},
     },
 
     -- Tabla de acciones y botones
@@ -161,6 +169,10 @@ scene.entities[entityIndex] = {
         rigid_body = {
             velocity = {x = 0, y = 0},
         },
+        health = {
+            max_health = 5,
+            current_health = 5,
+        },
         script = {
             path = "./assets/scripts/zombie.lua"
         },
@@ -195,6 +207,10 @@ scene.entities[entityIndex] = {
         },
         rigid_body = {
             velocity = {x = 0, y = 0},
+        },
+        health = {
+            max_health = 5,
+            current_health = 5,
         },
         script = {
             path = "./assets/scripts/zombie.lua"
@@ -231,6 +247,10 @@ scene.entities[entityIndex] = {
         rigid_body = {
             velocity = {x = 0, y = 0},
         },
+        health = {
+            max_health = 5,
+            current_health = 5,
+        },
         script = {
             path = "./assets/scripts/zombie.lua"
         },
@@ -265,6 +285,10 @@ scene.entities[entityIndex] = {
         },
         rigid_body = {
             velocity = {x = 0, y = 0},
+        },
+        health = {
+            max_health = 5,
+            current_health = 5,
         },
         script = {
             path = "./assets/scripts/zombie.lua"

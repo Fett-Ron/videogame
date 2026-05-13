@@ -10,6 +10,9 @@
 #include "../Components/TransformComponent.hpp"
 #include "../Components/TextComponent.hpp"
 #include "../Components/HealthComponent.hpp"
+#include "../Components/CircleColliderComponent.hpp"
+#include "../Components/ScriptComponent.hpp"
+#include "../Components/BulletComponent.hpp"
 #include "../ECS/ECS.hpp"
 #include "../Game/Game.hpp"
 
@@ -84,6 +87,46 @@ bool isEntityDead(Entity entity) {
 void setText(Entity entity, const std::string& text) {
     auto& textComponent = entity.getComponent<TextComponent>();
     textComponent.text = text;
+}
+
+// Bullets
+Entity createBullet(float x, float y, std::string direccion) {
+    auto& registry = *Game::getInstance().registry;
+    auto& lua = Game::getInstance().lua;
+    
+    Entity bullet = registry.createEntity();
+    int speed = 300;
+    glm::vec2 velocity = glm::vec2(0,0);
+    if (direccion == "up") {
+        velocity = glm::vec2(0, -speed);
+    } else if (direccion == "down") {
+        velocity = glm::vec2(0, speed);
+    } else if (direccion == "side") {
+        velocity = glm::vec2(speed, 0);
+    } else if (direccion == "side_left") {
+        velocity = glm::vec2(-speed, 0);
+    }
+    
+    // Add components
+    bullet.addComponent<TransformComponent>(glm::vec2(x, y), glm::vec2(1.0f, 1.0f), 0.0);
+    bullet.addComponent<SpriteComponent>("bullet", 4, 4);
+    bullet.addComponent<RigidBodyComponent>(velocity);
+    bullet.addComponent<CircleColliderComponent>(2, 4, 4);
+    bullet.addComponent<BulletComponent>(1);  // 1 punto de daño
+
+    // Load bullet script
+    lua["update"] = sol::nil;
+    lua.script_file("./assets/scripts/bullet.lua");
+    
+    sol::optional<sol::function> hasUpdate = lua["update"];
+    sol::function update = sol::nil;
+    if(hasUpdate != sol::nullopt){
+        update = lua["update"];
+    }
+    
+    bullet.addComponent<ScriptComponent>(update, sol::lua_nil);
+    
+    return bullet;
 }
 
 #endif // LUABINDING_HPP
