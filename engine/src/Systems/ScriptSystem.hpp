@@ -30,6 +30,10 @@ class ScriptSystem : public System {
         lua.set_function("change_animation", changeAnimation);
         lua.set_function("go_to_scene", goToScene);
         lua.set_function("get_time_miliseconds", getTimeMiliseconds);
+        lua.set_function("damage_entity", damageEntity);
+        lua.set_function("get_health", getHealth);
+        lua.set_function("is_entity_dead", isEntityDead);
+        lua.set_function("set_text", setText);
     }
 
     void update(sol::state& lua) {

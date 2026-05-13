@@ -40,7 +40,7 @@ scene = {
     -- Tabla de fuentes
     fonts = {
         [0] =
-        {fontId = "press_start", filePath = "./assets/fonts/PressStart2P-Regular.ttf", fontSize = 24,}
+        {fontId = "press_start_20", filePath = "./assets/fonts/PressStart2P-Regular.ttf", fontSize = 20,}
     },
 
     -- Tabla de acciones y teclas
@@ -121,6 +121,10 @@ scene.entities[entityIndex] = {
                 },
                 rigid_body = {
                     velocity = {x = 0, y = 0},
+                },
+                health = {
+                    max_health = 10,
+                    current_health = 10,
                 },
                 script = {
                     path = "./assets/scripts/player.lua"
@@ -274,6 +278,30 @@ scene.entities[entityIndex] = {
         transform = {
             position = {x = 760, y = 560},
             scale = {x = 2.0, y = 2.0},
+            rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1
+
+-- HUD - Texto de vida
+scene.entities[entityIndex] = {
+    components = {
+        text = {
+            text = "HP: 10",
+            fontId = "press_start_20",
+            r = 255,
+            g = 255,
+            b = 255,
+            a = 255,
+        },
+        script = {
+            path = "./assets/scripts/hud.lua"
+        },
+        transform = {
+            position = {x = 10, y = 10},
+            scale = {x = 1.0, y = 1.0},
             rotation = 0.0,
         }
     }

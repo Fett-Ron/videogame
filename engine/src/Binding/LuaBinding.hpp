@@ -8,6 +8,8 @@
 #include "../Components/SpriteComponent.hpp"
 #include "../Components/AnimationComponent.hpp"
 #include "../Components/TransformComponent.hpp"
+#include "../Components/TextComponent.hpp"
+#include "../Components/HealthComponent.hpp"
 #include "../ECS/ECS.hpp"
 #include "../Game/Game.hpp"
 
@@ -40,9 +42,9 @@ void changeAnimation(Entity entity, const std::string& assetId, int numFrames, i
     auto& sprite = entity.getComponent<SpriteComponent>();
     sprite.textureId = assetId;
     sprite.srcRect.x = 0;  // Reiniciar al primer frame
-    if (numFrames == 4) {
-        std::cout << "atacking" << std::endl;
-    }
+    // if (numFrames == 4) {
+    //     std::cout << "atacking" << std::endl;
+    // }
     auto& animation = entity.getComponent<AnimationComponent>();
     animation.numFrames = numFrames;
     animation.frameSpeedRate = speedRate;
@@ -60,6 +62,32 @@ void goToScene(const std::string& sceneName) {
 // Time
 int getTimeMiliseconds() {
     return SDL_GetTicks();
+}
+
+// Health
+void damageEntity(Entity entity, int damage) {
+    auto& health = entity.getComponent<HealthComponent>();
+    std::cout << "daño recibido" << std::endl;
+    health.currentHealth -= damage;
+    if (health.currentHealth < 0) {
+        health.currentHealth = 0;
+    }
+}
+
+int getHealth(Entity entity) {
+    auto& health = entity.getComponent<HealthComponent>();
+    return health.currentHealth;
+}
+
+bool isEntityDead(Entity entity) {
+    auto& health = entity.getComponent<HealthComponent>();
+    return health.currentHealth <= 0;
+}
+
+// Text
+void setText(Entity entity, const std::string& text) {
+    auto& textComponent = entity.getComponent<TextComponent>();
+    textComponent.text = text;
 }
 
 #endif // LUABINDING_HPP

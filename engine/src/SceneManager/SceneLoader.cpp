@@ -7,6 +7,7 @@
 #include "../Components/AnimationComponent.hpp"
 #include "../Components/CircleColliderComponent.hpp"
 #include "../Components/ClickableComponent.hpp"
+#include "../Components/HealthComponent.hpp"
 #include "../Components/RigidBodyComponent.hpp"
 #include "../Components/ScriptComponent.hpp"
 #include "../Components/SpriteComponent.hpp"
@@ -166,6 +167,14 @@ void SceneLoader::loadEntities(sol::state& lua, const sol::table& entities
                     )
                 );
             }
+
+            // HealthComponent
+            sol::optional<sol::table> hasHealth = components["health"];
+            if (hasHealth != sol::nullopt) {
+                int maxHealth = components["health"]["max_health"];
+                newEntity.addComponent<HealthComponent>(maxHealth);
+            }
+
             // Script Component
             sol::optional<sol::table> hasScript = components["script"];
             if (hasScript != sol::nullopt) {

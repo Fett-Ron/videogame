@@ -17,7 +17,8 @@ ZOMBIE_SYSTEM.states[zombie_id] = {
     last_attack_time = -3000,  -- Iniciar en pasado negativo para permitir primer ataque inmediato
     is_attacking = false,
     attack_start_time = 0,
-    attack_duration = 500  -- Duración de la animación de ataque en ms
+    attack_duration = 500,  -- Duración de la animación de ataque en ms
+    damage_applied = false  -- Para evitar aplicar daño múltiples veces por ataque
 }
 
 local my_state = ZOMBIE_SYSTEM.states[zombie_id]
@@ -68,6 +69,23 @@ function change_zombie_attack_animation(direction)
     change_animation(this, anim_name, 4, 10, false)
 end
 
+function is_facing_player(zombie_pos, player_pos, zombie_direction)
+    local dx = player_pos.x - zombie_pos.x
+    local dy = player_pos.y - zombie_pos.y
+    
+    if zombie_direction == "up" then
+        return dy < 0
+    elseif zombie_direction == "down" then
+        return dy > 0
+    elseif zombie_direction == "side_left" then
+        return dx < 0
+    elseif zombie_direction == "side" then
+        return dx > 0
+    end
+    
+    return false
+end
+
 function update()
     local player_pos = _G["player_position"]
     
@@ -85,16 +103,27 @@ function update()
     local dy = player_pos.y - zombie_pos.y
     local distance = math.sqrt(dx * dx + dy * dy)
     -- Distancia de ataque: ancho del sprite escalado (16 * 2.0 = 32)
-    local attack_range = 40
+    local attack_range = 35
     local current_time = get_time_miliseconds()
   
     -- Si está atacando actualmente, mantener la animación de ataque hasta que termine
     if my_state.is_attacking then
         set_velocity(this, 0, 0)
         
+        -- Aplicar daño al jugador si está en rango y mirando hacia él
+        if not my_state.damage_applied then
+            local player_entity = _G["player_entity"]
+            if player_entity ~= nil and is_facing_player(zombie_pos, player_pos, my_state.direction) then
+                damage_entity(player_entity, 1)
+                my_state.damage_applied = true
+                print("[ZOMBIE] Aplicó daño. Salud del jugador: " .. get_health(player_entity))
+            end
+        end
+        
         -- Verificar si la animación de ataque ha terminado
         if (current_time - my_state.attack_start_time) >= my_state.attack_duration then
             my_state.is_attacking = false
+            my_state.damage_applied = false  -- Reset para el próximo ataque
             -- Volver a animación de movimiento
             change_zombie_animation(new_direction)
             my_state.direction = new_direction
@@ -105,11 +134,9 @@ function update()
         my_state.is_attacking = true
         my_state.attack_start_time = current_time
         my_state.last_attack_time = current_time
+        my_state.damage_applied = false  -- Reset flag para este nuevo ataque
         change_zombie_attack_animation(new_direction)
         set_velocity(this, 0, 0)
-        
-        -- TODO: Aplicar daño al jugador si está en el rango de ataque
-        -- TODO: Considerar si el daño debe ser direccional (solo si está frente al zombie)
     -- Movimiento normal si no está atacando
     else
         set_velocity(this, vel_x, vel_y)
