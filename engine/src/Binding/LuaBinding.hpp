@@ -41,10 +41,6 @@ void setVelocity(Entity entity, float x, float y) {
 void changeAnimation(Entity entity, const std::string& assetId, int numFrames, int speedRate, bool isLoop) {
     auto& sprite = entity.getComponent<SpriteComponent>();
     sprite.textureId = assetId;
-    sprite.srcRect.x = 0;  // Reiniciar al primer frame
-    // if (numFrames == 4) {
-    //     std::cout << "atacking" << std::endl;
-    // }
     auto& animation = entity.getComponent<AnimationComponent>();
     animation.numFrames = numFrames;
     animation.frameSpeedRate = speedRate;
