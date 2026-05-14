@@ -13,6 +13,7 @@
 #include "../Components/CircleColliderComponent.hpp"
 #include "../Components/ScriptComponent.hpp"
 #include "../Components/BulletComponent.hpp"
+#include "../Components/ZombieComponent.hpp"
 #include "../ECS/ECS.hpp"
 #include "../Game/Game.hpp"
 
@@ -127,6 +128,73 @@ Entity createBullet(float x, float y, std::string direccion) {
     bullet.addComponent<ScriptComponent>(update, sol::lua_nil);
     
     return bullet;
+}
+
+void playGunshotSound() {
+    Game::getInstance().playGunshotSound();
+}
+
+Entity spawnZombie(float x, float y) {
+    auto& registry = *Game::getInstance().registry;
+    auto& lua = Game::getInstance().lua;
+
+    Entity zombie = registry.createEntity();
+
+    zombie.addComponent<TransformComponent>(
+        glm::vec2(x, y),
+        glm::vec2(2.0f, 2.0f),
+        0.0
+    );
+
+    zombie.addComponent<SpriteComponent>(
+        "zombie_idle_down",
+        16,
+        16
+    );
+
+    zombie.addComponent<AnimationComponent>(
+        6,
+        10,
+        true
+    );
+
+    zombie.addComponent<RigidBodyComponent>(
+        glm::vec2(0,0)
+    );
+
+    zombie.addComponent<CircleColliderComponent>(
+        8,
+        16,
+        16
+    );
+
+    zombie.addComponent<HealthComponent>(5);
+
+    zombie.addComponent<ZombieComponent>();
+
+    // cargar script
+    lua["update"] = sol::nil;
+    lua.script_file("./assets/scripts/zombie.lua");
+
+    sol::optional<sol::function> hasUpdate =
+        lua["update"];
+
+    sol::function update = sol::lua_nil;
+
+    if(hasUpdate != sol::nullopt){
+        update = lua["update"];
+    }
+
+    zombie.addComponent<ScriptComponent>(
+        update,
+        sol::lua_nil
+    );
+    Game::getInstance().aliveZombies++;
+    return zombie;
+}
+
+int getAliveZombies() {
+    return Game::getInstance().aliveZombies;
 }
 
 #endif // LUABINDING_HPP

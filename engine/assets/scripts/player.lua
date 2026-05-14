@@ -35,7 +35,7 @@ end
 function get_fire_offset(direction)
     -- Retorna el offset x, y para la posición de la bala según la dirección
     if direction == "up" then
-        return 16, 0
+        return 16, -10
     elseif direction == "down" then
         return 16, 16
     elseif direction == "side" then

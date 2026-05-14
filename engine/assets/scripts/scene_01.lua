@@ -153,162 +153,6 @@ scene.entities[entityIndex] = {
         
 entityIndex = entityIndex + 1
 
--- Zombie en esquina superior-izquierda
-scene.entities[entityIndex] = {
-    components = {       
-        animation = {
-            num_frames = 6,
-            speed_rate = 10,
-            is_loop = true,
-        },      
-        circle_collider = {
-            radius = 8,
-            width = 16,
-            height = 16,
-        },
-        rigid_body = {
-            velocity = {x = 0, y = 0},
-        },
-        health = {
-            max_health = 5,
-            current_health = 5,
-        },
-        script = {
-            path = "./assets/scripts/zombie.lua"
-        },
-        sprite = {
-            assetId = "zombie_idle_down",
-            width = 16,
-            height = 16,
-            src_rect = {x = 0, y = 0},
-        },
-        transform = {
-            position = {x = 50, y = 50},
-            scale = {x = 2.0, y = 2.0},
-            rotation = 0.0,
-        }
-    }
-}
-
-entityIndex = entityIndex + 1
-
--- Zombie en esquina superior-derecha
-scene.entities[entityIndex] = {
-    components = {       
-        animation = {
-            num_frames = 6,
-            speed_rate = 10,
-            is_loop = true,
-        },      
-        circle_collider = {
-            radius = 8,
-            width = 16,
-            height = 16,
-        },
-        rigid_body = {
-            velocity = {x = 0, y = 0},
-        },
-        health = {
-            max_health = 5,
-            current_health = 5,
-        },
-        script = {
-            path = "./assets/scripts/zombie.lua"
-        },
-        sprite = {
-            assetId = "zombie_idle_down",
-            width = 16,
-            height = 16,
-            src_rect = {x = 0, y = 0},
-        },
-        transform = {
-            position = {x = 700, y = 50},
-            scale = {x = 2.0, y = 2.0},
-            rotation = 0.0,
-        }
-    }
-}
-
-entityIndex = entityIndex + 1
-
--- Zombie en esquina inferior-izquierda
-scene.entities[entityIndex] = {
-    components = {       
-        animation = {
-            num_frames = 6,
-            speed_rate = 10,
-            is_loop = true,
-        },      
-        circle_collider = {
-            radius = 8,
-            width = 16,
-            height = 16,
-        },
-        rigid_body = {
-            velocity = {x = 0, y = 0},
-        },
-        health = {
-            max_health = 5,
-            current_health = 5,
-        },
-        script = {
-            path = "./assets/scripts/zombie.lua"
-        },
-        sprite = {
-            assetId = "zombie_idle_down",
-            width = 16,
-            height = 16,
-            src_rect = {x = 0, y = 0},
-        },
-        transform = {
-            position = {x = 50, y = 500},
-            scale = {x = 2.0, y = 2.0},
-            rotation = 0.0,
-        }
-    }
-}
-
-entityIndex = entityIndex + 1
-
--- Zombie en esquina inferior-derecha
-scene.entities[entityIndex] = {
-    components = {       
-        animation = {
-            num_frames = 6,
-            speed_rate = 10,
-            is_loop = true,
-        },      
-        circle_collider = {
-            radius = 8,
-            width = 16,
-            height = 16,
-        },
-        rigid_body = {
-            velocity = {x = 0, y = 0},
-        },
-        health = {
-            max_health = 5,
-            current_health = 5,
-        },
-        script = {
-            path = "./assets/scripts/zombie.lua"
-        },
-        sprite = {
-            assetId = "zombie_idle_down",
-            width = 16,
-            height = 16,
-            src_rect = {x = 0, y = 0},
-        },
-        transform = {
-            position = {x = 700, y = 500},
-            scale = {x = 2.0, y = 2.0},
-            rotation = 0.0,
-        }
-    }
-}
-
-entityIndex = entityIndex + 1
-
 -- HUD - Texto de vida
 scene.entities[entityIndex] = {
     components = {
@@ -327,6 +171,16 @@ scene.entities[entityIndex] = {
             position = {x = 10, y = 10},
             scale = {x = 1.0, y = 1.0},
             rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1
+
+scene.entities[entityIndex] = {
+    components = {
+        script = {
+            path = "./assets/scripts/wave_manager.lua"
         }
     }
 }

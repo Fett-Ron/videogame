@@ -7,7 +7,6 @@
 #include "../Binding/LuaBinding.hpp"
 #include "../ECS/ECS.hpp"
 #include "../Components/ScriptComponent.hpp"
-#include "../Game/Game.hpp"
 
 class ScriptSystem : public System {
   public:
@@ -38,9 +37,9 @@ class ScriptSystem : public System {
         lua.set_function("is_entity_dead", isEntityDead);
         lua.set_function("set_text", setText);
         lua.set_function("create_bullet", createBullet);
-        lua.set_function("play_gunshot_sound", []() {
-            Game::getInstance().playGunshotSound();
-        });
+        lua.set_function("play_gunshot_sound", playGunshotSound);
+        lua.set_function("spawn_zombie", spawnZombie);
+        lua.set_function("get_alive_zombies", getAliveZombies);
     }
 
     void update(sol::state& lua) {
