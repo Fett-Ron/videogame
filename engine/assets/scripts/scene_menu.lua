@@ -6,6 +6,7 @@ scene = {
     fonts = {
         [0] =
         {fontId = "press_start_24", filePath = "./assets/fonts/PressStart2P-Regular.ttf", fontSize = 24,},
+        {fontId = "press_start_15", filePath = "./assets/fonts/PressStart2P-Regular.ttf", fontSize = 15,},
         {fontId = "press_start_32", filePath = "./assets/fonts/PressStart2P-Regular.ttf", fontSize = 32,}
     },
 
@@ -101,7 +102,8 @@ scene = {
                     rotation = 0.0,
                 }
             }
-        },{
+        },
+        {
             components = {
                 clickable = {},
                 text = {
@@ -114,6 +116,24 @@ scene = {
                 },
                 transform = {
                     position = {x = 50.0, y = 400.0},
+                    scale  = {x = 1.0, y = 1.0},
+                    rotation = 0.0,
+                }
+            }
+        },
+        {
+            components = {
+                clickable = {},
+                text = {
+                    text = "Marcelo Picado, C15950",
+                    fontId = "press_start_15",
+                    r = 200,
+                    g = 150,
+                    b = 0,
+                    a = 255
+                },
+                transform = {
+                    position = {x = 50.0, y = 450.0},
                     scale  = {x = 1.0, y = 1.0},
                     rotation = 0.0,
                 }
