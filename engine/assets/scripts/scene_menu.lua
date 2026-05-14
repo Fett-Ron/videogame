@@ -125,6 +125,24 @@ scene = {
             components = {
                 clickable = {},
                 text = {
+                    text = "pausa con P",
+                    fontId = "press_start_24",
+                    r = 200,
+                    g = 150,
+                    b = 0,
+                    a = 255
+                },
+                transform = {
+                    position = {x = 50.0, y = 450.0},
+                    scale  = {x = 1.0, y = 1.0},
+                    rotation = 0.0,
+                }
+            }
+        },
+        {
+            components = {
+                clickable = {},
+                text = {
                     text = "Marcelo Picado, C15950",
                     fontId = "press_start_15",
                     r = 200,
@@ -133,7 +151,7 @@ scene = {
                     a = 255
                 },
                 transform = {
-                    position = {x = 50.0, y = 450.0},
+                    position = {x = 50.0, y = 500.0},
                     scale  = {x = 1.0, y = 1.0},
                     rotation = 0.0,
                 }

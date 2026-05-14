@@ -54,6 +54,10 @@ function update()
         return
     end
 
+    -- if is_paused() then
+    --     return
+    -- end
+
     _G["total_zombies_killed"] = get_total_zombies_killed()
     local current_time = get_time_miliseconds()
 

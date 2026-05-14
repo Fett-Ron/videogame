@@ -45,6 +45,8 @@ class ScriptSystem : public System {
         lua.set_function("set_game_over", setGameOver);
         lua.set_function("set_text_color", setTextColor);
         lua.set_function("set_visible", setVisible);
+        lua.set_function("is_paused", isPaused);
+        lua.set_function("set_paused", setPaused);
     }
 
     void update(sol::state& lua) {

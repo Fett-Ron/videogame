@@ -21,6 +21,7 @@
 inline int aliveZombies = 0;
 inline int totalZombiesKilled = 0;
 inline bool gameOver = false;
+inline bool paused = false;
 
 // Controles
 inline bool isActionActivated(const std::string& action) {
@@ -228,6 +229,14 @@ inline void setVisible(Entity entity, bool visible) {
         entity.getComponent<VisibleComponent>();
 
     visibleComponent.visible = visible;
+}
+
+inline bool isPaused() {
+    return paused;
+}
+
+inline void setPaused(bool value) {
+    paused = value;
 }
 
 #endif // LUABINDING_HPP

@@ -58,6 +58,7 @@ scene = {
         {name = "down", key = 115},
         {name = "right", key = 100},
         {name = "shoot", key = 106},
+        {name = "pause", key = 112},
     },
 
     -- Tabla de acciones y botones

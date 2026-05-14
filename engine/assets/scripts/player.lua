@@ -47,8 +47,22 @@ function get_fire_offset(direction)
 end
 
 function update()
+    local last_pause_press = false
     if get_health(this) <= 0 then
         set_game_over(true)
+        set_velocity(this, 0, 0)
+        return
+    end
+
+    local pause_pressed = is_action_activated("pause")
+
+    if pause_pressed and not last_pause_press then
+        set_paused(not is_paused())
+    end
+
+    last_pause_press = pause_pressed
+
+    if is_paused() then
         set_velocity(this, 0, 0)
         return
     end

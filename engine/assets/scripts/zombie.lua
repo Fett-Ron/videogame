@@ -93,6 +93,11 @@ function update()
         return
     end
 
+    if is_paused() then
+        set_velocity(this, 0, 0)
+        return
+    end
+
     local player_pos = _G["player_position"]
     
     if player_pos == nil then
