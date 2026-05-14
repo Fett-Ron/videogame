@@ -47,7 +47,7 @@ scene = {
     -- Tabla de fuentes
     fonts = {
         [0] =
-        {fontId = "press_start_20", filePath = "./assets/fonts/PressStart2P-Regular.ttf", fontSize = 20,}
+        {fontId = "press_start_11", filePath = "./assets/fonts/PressStart2P-Regular.ttf", fontSize = 11,}
     },
 
     -- Tabla de acciones y teclas
@@ -158,7 +158,7 @@ scene.entities[entityIndex] = {
     components = {
         text = {
             text = "HP: 10",
-            fontId = "press_start_20",
+            fontId = "press_start_11",
             r = 255,
             g = 255,
             b = 255,

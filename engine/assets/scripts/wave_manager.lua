@@ -18,6 +18,10 @@ local corners = {
     {x = 700, y = 500}
 }
 
+_G["current_wave"] = 1
+_G["wave_total_zombies"] = 0
+_G["total_zombies_killed"] = 0
+
 function calculate_wave_size(wave)
 
     local amount =
@@ -33,7 +37,6 @@ function calculate_wave_size(wave)
 end
 
 function start_wave()
-
     zombies_to_spawn =
         calculate_wave_size(current_wave)
 
@@ -41,15 +44,14 @@ function start_wave()
 
     next_spawn_time =
         get_time_miliseconds()
+    _G["current_wave"] = current_wave
+    _G["wave_total_zombies"] = zombies_to_spawn
 
-    print("Wave: " .. current_wave)
-    print("Zombies: " .. zombies_to_spawn)
 end
 
 function update()
-
-    local current_time =
-        get_time_miliseconds()
+    _G["total_zombies_killed"] = get_total_zombies_killed()
+    local current_time = get_time_miliseconds()
 
     -- spawn gradual
     if zombies_spawned < zombies_to_spawn then

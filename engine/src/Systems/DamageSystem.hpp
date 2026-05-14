@@ -38,6 +38,7 @@ class DamageSystem : public System {
             if (healthB.currentHealth <= 0) {
                 std::cout << "[DAMAGESYSTEM] Zombie eliminado" << std::endl;
                 aliveZombies--;
+                totalZombiesKilled++;
                 e.b.kill();
             }
             e.a.kill();  // Bala desaparece
@@ -51,6 +52,7 @@ class DamageSystem : public System {
             if (healthA.currentHealth <= 0) {
                 std::cout << "[DAMAGESYSTEM] Zombie eliminado" << std::endl;
                 aliveZombies--;
+                totalZombiesKilled++;
                 e.a.kill();
             }
             e.b.kill();  // Bala desaparece

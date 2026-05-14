@@ -18,6 +18,7 @@
 #include "../Game/Game.hpp"
 
 inline int aliveZombies = 0;
+inline int totalZombiesKilled = 0;
 
 // Controles
 bool isActionActivated(const std::string& action) {
@@ -197,6 +198,10 @@ Entity spawnZombie(float x, float y) {
 
 int getAliveZombies() {
     return aliveZombies;
+}
+
+int getTotalZombiesKilled() {
+    return totalZombiesKilled;
 }
 
 #endif // LUABINDING_HPP

@@ -40,6 +40,7 @@ class ScriptSystem : public System {
         lua.set_function("play_gunshot_sound", playGunshotSound);
         lua.set_function("spawn_zombie", spawnZombie);
         lua.set_function("get_alive_zombies", getAliveZombies);
+        lua.set_function("get_total_zombies_killed", getTotalZombiesKilled);
     }
 
     void update(sol::state& lua) {
