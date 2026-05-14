@@ -183,7 +183,7 @@ scene.entities[entityIndex] = {
             src_rect = {x = 0, y = 0},
         },
         transform = {
-            position = {x = 20, y = 20},
+            position = {x = 50, y = 50},
             scale = {x = 2.0, y = 2.0},
             rotation = 0.0,
         }
@@ -222,7 +222,7 @@ scene.entities[entityIndex] = {
             src_rect = {x = 0, y = 0},
         },
         transform = {
-            position = {x = 760, y = 20},
+            position = {x = 700, y = 50},
             scale = {x = 2.0, y = 2.0},
             rotation = 0.0,
         }
@@ -261,7 +261,7 @@ scene.entities[entityIndex] = {
             src_rect = {x = 0, y = 0},
         },
         transform = {
-            position = {x = 20, y = 560},
+            position = {x = 50, y = 500},
             scale = {x = 2.0, y = 2.0},
             rotation = 0.0,
         }
@@ -300,7 +300,7 @@ scene.entities[entityIndex] = {
             src_rect = {x = 0, y = 0},
         },
         transform = {
-            position = {x = 760, y = 560},
+            position = {x = 700, y = 500},
             scale = {x = 2.0, y = 2.0},
             rotation = 0.0,
         }

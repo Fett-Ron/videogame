@@ -108,7 +108,7 @@ function update()
             local bullet_y = pos.y + offset_y
             
             create_bullet(bullet_x, bullet_y, current_direction)
-            
+            play_gunshot_sound()
             -- Mostrar animación de disparo
             --local fire_anim = "fire_" .. current_direction
             --change_animation(this, fire_anim, 3, 10, false)

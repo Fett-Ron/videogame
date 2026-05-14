@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
 #include <sol/sol.hpp>
 
 #include <memory>
@@ -25,6 +26,7 @@ class Game {
     int windowWidth = 0;
     int windowHeight = 0;
     int millisecsPreviousFrame = 0;
+    Mix_Chunk* gunshotSound;
     
   public:    
     SDL_Renderer* renderer = nullptr;
@@ -48,6 +50,7 @@ class Game {
     static Game& getInstance();
     void init();
     void run();
+    void playGunshotSound();
     void destroy();
 };
 

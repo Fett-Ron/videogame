@@ -1,4 +1,5 @@
 #include <iostream>
+#include <SDL2/SDL_mixer.h>
 
 #include "Game.hpp"
 
@@ -61,6 +62,12 @@ void Game::init(){
         return;
     }
 
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+    std::cerr << "[GAME] Error al inicializar SDL_mixer: "
+              << Mix_GetError() << std::endl;
+    return;
+}
+
     windowWidth = 800;
     windowHeight = 600;
     window = SDL_CreateWindow(
@@ -82,6 +89,13 @@ void Game::init(){
         std::cerr << "[GAME] Error al crear el renderizador: " << SDL_GetError() << std::endl;
         return;
     }
+
+    gunshotSound = Mix_LoadWAV("./assets/gun/audio.wav");
+
+    if (!gunshotSound) {
+    std::cerr << "[GAME] Error cargando sonido: "
+              << Mix_GetError() << std::endl;
+}
 
     isRunning = true;
 }
@@ -203,7 +217,14 @@ void Game::destroy() {
     if(window) {
         SDL_DestroyWindow(window);
     }
+    if (gunshotSound) {
+        Mix_FreeChunk(gunshotSound);
+    }
     TTF_Quit();
     IMG_Quit();
     SDL_Quit(); 
+}
+
+void Game::playGunshotSound() {
+    Mix_PlayChannel(-1, gunshotSound, 0);
 }
