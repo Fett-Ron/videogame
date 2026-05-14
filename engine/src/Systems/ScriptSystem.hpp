@@ -41,6 +41,10 @@ class ScriptSystem : public System {
         lua.set_function("spawn_zombie", spawnZombie);
         lua.set_function("get_alive_zombies", getAliveZombies);
         lua.set_function("get_total_zombies_killed", getTotalZombiesKilled);
+        lua.set_function("is_game_over", isGameOver);
+        lua.set_function("set_game_over", setGameOver);
+        lua.set_function("set_text_color", setTextColor);
+        lua.set_function("set_visible", setVisible);
     }
 
     void update(sol::state& lua) {

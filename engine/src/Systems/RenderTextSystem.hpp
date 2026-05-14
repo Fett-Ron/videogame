@@ -10,17 +10,23 @@
 #include "../ECS/ECS.hpp"
 #include "../Components/TextComponent.hpp"
 #include "../Components/TransformComponent.hpp"
+#include "../Components/VisibleComponent.hpp"
 
 class RenderTextSystem : public System {
   public:
     RenderTextSystem(){
         requiereComponent<TextComponent>();
         requiereComponent<TransformComponent>();
+        requiereComponent<VisibleComponent>();
     }
 
     void update(SDL_Renderer* renderer
         , const std::unique_ptr<AssetManager>& assetManager){
         for (auto entity : getSystemEntities()) {
+            auto& visible = entity.getComponent<VisibleComponent>();
+            if (!visible.visible) {
+                continue;
+            }
             auto& text = entity.getComponent<TextComponent>();
             auto& transform = entity.getComponent<TransformComponent>();
 

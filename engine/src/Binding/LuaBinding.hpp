@@ -14,38 +14,40 @@
 #include "../Components/ScriptComponent.hpp"
 #include "../Components/BulletComponent.hpp"
 #include "../Components/ZombieComponent.hpp"
+#include "../Components/VisibleComponent.hpp"
 #include "../ECS/ECS.hpp"
 #include "../Game/Game.hpp"
 
 inline int aliveZombies = 0;
 inline int totalZombiesKilled = 0;
+inline bool gameOver = false;
 
 // Controles
-bool isActionActivated(const std::string& action) {
+inline bool isActionActivated(const std::string& action) {
     return Game::getInstance().controllerManager->isActionActivated(action);
 }
 
 // TransformComponent
-glm::vec2 getPosition(Entity entity) {
+inline glm::vec2 getPosition(Entity entity) {
     auto& transform = entity.getComponent<TransformComponent>();
     return transform.position;
 }
 
-void setPosition(Entity entity, float x, float y) {
+inline void setPosition(Entity entity, float x, float y) {
     auto& transform = entity.getComponent<TransformComponent>();
     transform.position.x = x;
     transform.position.y = y;
 }
 
 // RigidBodyComponent
-void setVelocity(Entity entity, float x, float y) {
+inline void setVelocity(Entity entity, float x, float y) {
     auto& rigidBody = entity.getComponent<RigidBodyComponent>();
     rigidBody.velocity.x = x;
     rigidBody.velocity.y = y;
 }
 
 // Cambiar animación y sprite
-void changeAnimation(Entity entity, const std::string& assetId, int numFrames, int speedRate, bool isLoop) {
+inline void changeAnimation(Entity entity, const std::string& assetId, int numFrames, int speedRate, bool isLoop) {
     auto& sprite = entity.getComponent<SpriteComponent>();
     sprite.textureId = assetId;
     auto& animation = entity.getComponent<AnimationComponent>();
@@ -57,18 +59,18 @@ void changeAnimation(Entity entity, const std::string& assetId, int numFrames, i
 }
 
 // Scenes
-void goToScene(const std::string& sceneName) {
+inline void goToScene(const std::string& sceneName) {
     Game::getInstance().sceneManager->setNextScene(sceneName);
     Game::getInstance().sceneManager->stopScene();
 }
 
 // Time
-int getTimeMiliseconds() {
+inline int getTimeMiliseconds() {
     return SDL_GetTicks();
 }
 
 // Health
-void damageEntity(Entity entity, int damage) {
+inline void damageEntity(Entity entity, int damage) {
     auto& health = entity.getComponent<HealthComponent>();
     std::cout << "daño recibido" << std::endl;
     health.currentHealth -= damage;
@@ -77,24 +79,24 @@ void damageEntity(Entity entity, int damage) {
     }
 }
 
-int getHealth(Entity entity) {
+inline int getHealth(Entity entity) {
     auto& health = entity.getComponent<HealthComponent>();
     return health.currentHealth;
 }
 
-bool isEntityDead(Entity entity) {
+inline bool isEntityDead(Entity entity) {
     auto& health = entity.getComponent<HealthComponent>();
     return health.currentHealth <= 0;
 }
 
 // Text
-void setText(Entity entity, const std::string& text) {
+inline void setText(Entity entity, const std::string& text) {
     auto& textComponent = entity.getComponent<TextComponent>();
     textComponent.text = text;
 }
 
 // Bullets
-Entity createBullet(float x, float y, std::string direccion) {
+inline Entity createBullet(float x, float y, std::string direccion) {
     auto& registry = *Game::getInstance().registry;
     auto& lua = Game::getInstance().lua;
     
@@ -133,11 +135,11 @@ Entity createBullet(float x, float y, std::string direccion) {
     return bullet;
 }
 
-void playGunshotSound() {
+inline void playGunshotSound() {
     Game::getInstance().playGunshotSound();
 }
 
-Entity spawnZombie(float x, float y) {
+inline Entity spawnZombie(float x, float y) {
     auto& registry = *Game::getInstance().registry;
     auto& lua = Game::getInstance().lua;
 
@@ -196,12 +198,36 @@ Entity spawnZombie(float x, float y) {
     return zombie;
 }
 
-int getAliveZombies() {
+inline int getAliveZombies() {
     return aliveZombies;
 }
 
-int getTotalZombiesKilled() {
+inline int getTotalZombiesKilled() {
     return totalZombiesKilled;
+}
+
+inline bool isGameOver() {
+    return gameOver;
+}
+
+inline void setGameOver(bool value) {
+    gameOver = value;
+}
+
+inline void setTextColor(Entity entity, int r, int g, int b, int a) {
+    auto& text = entity.getComponent<TextComponent>();
+
+    text.color.r = r;
+    text.color.g = g;
+    text.color.b = b;
+    text.color.a = a;
+}
+
+inline void setVisible(Entity entity, bool visible) {
+    auto& visibleComponent =
+        entity.getComponent<VisibleComponent>();
+
+    visibleComponent.visible = visible;
 }
 
 #endif // LUABINDING_HPP

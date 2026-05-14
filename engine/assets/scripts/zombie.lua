@@ -87,6 +87,12 @@ function is_facing_player(zombie_pos, player_pos, zombie_direction)
 end
 
 function update()
+
+    if is_game_over() then
+        set_velocity(this, 0, 0)
+        return
+    end
+
     local player_pos = _G["player_position"]
     
     if player_pos == nil then

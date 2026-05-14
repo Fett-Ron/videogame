@@ -20,7 +20,8 @@ class UISystem : public System {
     UISystem() {
         requiereComponent<ClickableComponent>();
         requiereComponent<TextComponent>();
-        requiereComponent<TransformComponent>();        
+        requiereComponent<TransformComponent>();
+        requiereComponent<VisibleComponent>();  
     }
 
     void SubscribeToClickEvent(std::unique_ptr<EventManager>& eventManager) {
@@ -29,6 +30,10 @@ class UISystem : public System {
 
     void onClickEvent(ClickEvent& e) {
         for (auto entity : getSystemEntities()) {
+            auto& visible = entity.getComponent<VisibleComponent>();
+            if (!visible.visible) {
+                continue;
+            }
             const auto& text = entity.getComponent<TextComponent>();
             const auto& transform = entity.getComponent<TransformComponent>();
 

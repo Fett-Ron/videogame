@@ -10,6 +10,15 @@ function update()
     local current_health =
         get_health(player_entity)
 
+    -- GAME OVER
+    if current_health <= 0 then
+        
+        set_visible(_G["game_over_title"], true)        
+        set_visible(_G["restart_button"], true)        
+        set_visible(_G["menu_button"], true)
+        set_game_over(true)
+    end
+
     local current_wave =
         _G["current_wave"] or 1
 

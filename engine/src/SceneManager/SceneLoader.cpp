@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "../AssetManager/AssetManager.hpp"
+#include "../Binding/LuaBinding.hpp"
 #include "../Components/AnimationComponent.hpp"
 #include "../Components/CircleColliderComponent.hpp"
 #include "../Components/ClickableComponent.hpp"
@@ -13,6 +14,8 @@
 #include "../Components/SpriteComponent.hpp"
 #include "../Components/TextComponent.hpp"
 #include "../Components/TransformComponent.hpp"
+#include "../Components/VisibleComponent.hpp"
+#include "../ECS/ECS.hpp"
 
 SceneLoader::SceneLoader() {
     std::cout << "[SCENELOADER] se ejecuta el constructor" << std::endl;
@@ -27,6 +30,16 @@ void SceneLoader::loadScene(const std::string& scenePath, sol::state& lua
     , std::unique_ptr<ControllerManager>& controllerManager
     , std::unique_ptr<Registry>& registry, SDL_Renderer* renderer) {
     
+    aliveZombies = 0;
+    totalZombiesKilled = 0;
+    gameOver = false;
+
+    lua["player_entity"] = sol::nil;
+    lua["player_position"] = sol::nil;
+    lua["player_direction"] = sol::nil;
+
+    registry->clearAllEntities();
+
     sol::load_result script_result = lua.load_file(scenePath);
     if (!script_result.valid()) {
         sol::error err = script_result;
@@ -223,6 +236,22 @@ void SceneLoader::loadEntities(sol::state& lua, const sol::table& entities
                 );
             }
 
+            // Visibility
+            sol::optional<sol::table> hasVisible =
+            components["visible"];
+            if (hasVisible != sol::nullopt) {
+
+                bool visible =
+                    components["visible"]["value"];
+
+                newEntity.addComponent<VisibleComponent>(
+                    visible
+                );
+            }
+            else {
+                newEntity.addComponent<VisibleComponent>(true);
+            }
+            
             // TransformComponent
             sol::optional<sol::table> hasTransform = components["transform"];
             if (hasTransform != sol::nullopt) {

@@ -50,6 +50,10 @@ function start_wave()
 end
 
 function update()
+    if is_game_over() then
+        return
+    end
+
     _G["total_zombies_killed"] = get_total_zombies_killed()
     local current_time = get_time_miliseconds()
 

@@ -164,6 +164,9 @@ scene.entities[entityIndex] = {
             b = 255,
             a = 255,
         },
+        visible = {
+            value = true
+        },
         script = {
             path = "./assets/scripts/hud.lua"
         },
@@ -187,3 +190,82 @@ scene.entities[entityIndex] = {
 
 entityIndex = entityIndex + 1
 
+scene.entities[entityIndex] = {
+    components = {
+        text = {
+            text = "GAME OVER",
+            fontId = "press_start_11",
+            r = 255,
+            g = 0,
+            b = 0,
+            a = 255,
+        },
+        visible = {
+            value = false
+        },
+        script = {
+            path = "./assets/scripts/game_over_text.lua"
+        },
+        transform = {
+            position = {x = 280, y = 220},
+            scale = {x = 1.0, y = 1.0},
+            rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1
+
+scene.entities[entityIndex] = {
+    components = {
+        clickable = {},
+        text = {
+            text = "Restart",
+            fontId = "press_start_11",
+            r = 255,
+            g = 255,
+            b = 255,
+            a = 255,
+        },
+        visible = {
+            value = false
+        },
+        script = {
+            path = "./assets/scripts/restart_button.lua"
+        },
+        transform = {
+            position = {x = 300, y = 300},
+            scale = {x = 1.0, y = 1.0},
+            rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1
+
+scene.entities[entityIndex] = {
+    components = {
+        clickable = {},
+        text = {
+            text = "Menu",
+            fontId = "press_start_11",
+            r = 255,
+            g = 255,
+            b = 255,
+            a = 255,
+        },
+        visible = {
+            value = false
+        },
+        script = {
+            path = "./assets/scripts/menu_button_gameover.lua"
+        },
+        transform = {
+            position = {x = 300, y = 350},
+            scale = {x = 1.0, y = 1.0},
+            rotation = 0.0,
+        }
+    }
+}
+
+entityIndex = entityIndex + 1

@@ -47,6 +47,12 @@ function get_fire_offset(direction)
 end
 
 function update()
+    if get_health(this) <= 0 then
+        set_game_over(true)
+        set_velocity(this, 0, 0)
+        return
+    end
+
     -- Exponer posición global para otros scripts
     _G["player_entity"] = this
     local pos = get_position(this)
