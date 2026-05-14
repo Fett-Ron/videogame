@@ -36,7 +36,6 @@ class Game {
     std::unique_ptr<ControllerManager> controllerManager;
     std::unique_ptr<SceneManager> sceneManager;
     sol::state lua;
-    int aliveZombies = 0;
 
   private:
     void setup();

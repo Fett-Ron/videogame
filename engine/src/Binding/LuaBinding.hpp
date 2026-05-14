@@ -17,6 +17,8 @@
 #include "../ECS/ECS.hpp"
 #include "../Game/Game.hpp"
 
+inline int aliveZombies = 0;
+
 // Controles
 bool isActionActivated(const std::string& action) {
     return Game::getInstance().controllerManager->isActionActivated(action);
@@ -189,12 +191,12 @@ Entity spawnZombie(float x, float y) {
         update,
         sol::lua_nil
     );
-    Game::getInstance().aliveZombies++;
+    aliveZombies++;
     return zombie;
 }
 
 int getAliveZombies() {
-    return Game::getInstance().aliveZombies;
+    return aliveZombies;
 }
 
 #endif // LUABINDING_HPP

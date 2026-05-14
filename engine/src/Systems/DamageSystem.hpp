@@ -5,7 +5,7 @@
 #include <memory>
 
 #include "../ECS/ECS.hpp"
-#include "../Game/Game.hpp"
+#include "../Binding/LuaBinding.hpp"
 #include "../Components/CircleColliderComponent.hpp"
 #include "../Components/HealthComponent.hpp"
 #include "../Components/BulletComponent.hpp"
@@ -37,7 +37,7 @@ class DamageSystem : public System {
             std::cout << "[DAMAGESYSTEM] Bala daña a zombie. Salud: " << healthB.currentHealth << std::endl;
             if (healthB.currentHealth <= 0) {
                 std::cout << "[DAMAGESYSTEM] Zombie eliminado" << std::endl;
-                Game::getInstance().aliveZombies--;
+                aliveZombies--;
                 e.b.kill();
             }
             e.a.kill();  // Bala desaparece
@@ -50,7 +50,7 @@ class DamageSystem : public System {
             std::cout << "[DAMAGESYSTEM] Bala daña a zombie. Salud: " << healthA.currentHealth << std::endl;
             if (healthA.currentHealth <= 0) {
                 std::cout << "[DAMAGESYSTEM] Zombie eliminado" << std::endl;
-                Game::getInstance().aliveZombies--;
+                aliveZombies--;
                 e.a.kill();
             }
             e.b.kill();  // Bala desaparece
