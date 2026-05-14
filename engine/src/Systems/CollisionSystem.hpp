@@ -33,14 +33,8 @@ class CollisionSystem : public System {
                 auto bCollider = b.getComponent<CircleColliderComponent>();
                 auto& bTransform = b.getComponent<TransformComponent>();
 
-                glm::vec2 aCenterPos = glm::vec2(
-                    aTransform.position.x - (aCollider.width / 2) * aTransform.scale.x,
-                    aTransform.position.y - (aCollider.height / 2) * aTransform.scale.x
-                );
-                glm::vec2 bCenterPos = glm::vec2(
-                    bTransform.position.x - (bCollider.width / 2) * bTransform.scale.x,
-                    bTransform.position.y - (bCollider.height / 2) * bTransform.scale.x
-                );
+                glm::vec2 aCenterPos = aTransform.position;
+                glm::vec2 bCenterPos = bTransform.position;
 
                 int aRadius = aCollider.radius * aTransform.scale.x;
                 int bRadius = bCollider.radius * bTransform.scale.x;
@@ -48,10 +42,7 @@ class CollisionSystem : public System {
                 bool collision = checkCircularCollision(aRadius, bRadius
                     , aCenterPos, bCenterPos);
                 if (collision) {
-                    //std::cout << "[COLLISIONSYSTEM] Colision entre " << a.getId() 
-                    //<< " y " << b.getId() << std::endl;
                     
-                    // Resolver colisión: separar entidades
                     resolveCollision(aTransform, bTransform, aCenterPos, bCenterPos, aRadius, bRadius);
                     
                     eventManager->emitEvent<CollisionEvent>(a, b);

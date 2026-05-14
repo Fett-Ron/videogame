@@ -34,15 +34,14 @@ end
 
 function get_fire_offset(direction)
     -- Retorna el offset x, y para la posición de la bala según la dirección
-    local offset = 15  -- Distancia desde el centro del jugador
     if direction == "up" then
-        return 15, 0
+        return 16, 0
     elseif direction == "down" then
-        return 15, 15
+        return 16, 16
     elseif direction == "side" then
-        return 15, 15
+        return 16, 16
     elseif direction == "side_left" then
-        return 0, 15
+        return 0, 16
     end
     return 0, 0
 end
